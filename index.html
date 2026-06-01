@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Goa Getaway – You've Been Selected!</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A843;
+    --gold-light: #F5D98A;
+    --gold-dark: #8B6510;
+    --gold-glow: #D4A84344;
+    --teal: #0B8A9A;
+    --teal-light: #14C4DA;
+    --ocean: #062030;
+    --deep: #040F18;
+    --sand: #FDF0D0;
+    --coral: #FF5A36;
+    --white: #FFFFFF;
+    --muted: #7A9AB0;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── TICKER BANNER ─── */
+  .ticker-wrap {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    padding: 9px 0; overflow: hidden;
+  }
+  .ticker {
+    display: flex; gap: 60px; width: max-content;
+    animation: ticker 22s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker span {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--deep);
+  }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center;
+  }
+  .nav-pill {
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(4,15,24,0.82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212,168,67,0.25);
+    border-radius: 99px; padding: 12px 28px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 700; color: var(--gold-light);
+    letter-spacing: 1px;
+  }
+  .nav-cta {
+    background: var(--gold); color: var(--deep);
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 8px 18px; border-radius: 99px;
+    cursor: pointer; border: none; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: scale(1.05); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; min-height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 200px;
+    overflow: hidden;
+  }
+
+  /* Layered background */
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 100% 50% at 50% 100%, #0B8A9A33 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 30%, #D4A84311 0%, transparent 55%),
+      radial-gradient(ellipse 70% 60% at 80% 10%, #14C4DA0A 0%, transparent 50%),
+      linear-gradient(170deg, #040F18 0%, #062030 55%, #062A1A 100%);
+  }
+
+  /* Grid overlay */
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(212,168,67,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,168,67,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(60px); pointer-events: none; z-index: 0;
+  }
+  .orb-1 { width: 400px; height: 400px; background: #0B8A9A1A; top: -100px; right: -100px; animation: drift 12s ease-in-out infinite; }
+  .orb-2 { width: 300px; height: 300px; background: #D4A84315; bottom: 100px; left: -80px; animation: drift 15s ease-in-out infinite reverse; }
+  @keyframes drift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,20px)} }
+
+  /* Beach scene */
+  .beach-scene {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 200px; z-index: 1;
+  }
+  .sun-wrap { position: absolute; top: 20px; right: 12%; }
+  .sun {
+    width: 65px; height: 65px;
+    background: radial-gradient(circle, #FFF176, #FFD600 50%, #FF8F00);
+    border-radius: 50%;
+    box-shadow: 0 0 0 12px #FFD60015, 0 0 0 30px #FFD60010, 0 0 80px 20px #FFD60033;
+    animation: sun-pulse 5s ease-in-out infinite;
+  }
+  @keyframes sun-pulse { 0%,100%{box-shadow:0 0 0 12px #FFD60015,0 0 0 30px #FFD60010,0 0 80px 20px #FFD60033} 50%{box-shadow:0 0 0 20px #FFD60020,0 0 0 45px #FFD60015,0 0 100px 30px #FFD60044} }
+
+  .horizon {
+    position: absolute; bottom: 90px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,0.3), transparent);
+  }
+  .sea {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(to bottom, #0A4A6A, #062030);
+    border-radius: 60% 60% 0 0 / 30px 30px 0 0;
+  }
+  .wave-1, .wave-2 {
+    position: absolute; left: 0; right: 0; height: 50px;
+    border-radius: 50% 50% 0 0 / 20px 20px 0 0;
+  }
+  .wave-1 { bottom: 60px; background: rgba(20,196,218,0.18); animation: wv 7s ease-in-out infinite; }
+  .wave-2 { bottom: 40px; background: rgba(11,138,154,0.25); animation: wv 9s ease-in-out infinite reverse; }
+  @keyframes wv { 0%,100%{transform:scaleX(1.02) translateX(-8px)} 50%{transform:scaleX(0.98) translateX(8px)} }
+
+  .palm { position: absolute; bottom: 80px; font-size: 80px; line-height: 1; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); z-index: 2; }
+  .palm-l { left: -5px; transform: rotate(-18deg); }
+  .palm-r { right: -5px; transform: rotate(18deg) scaleX(-1); }
+
+  /* Particles */
+  .particles { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+  .particle {
+    position: absolute; border-radius: 50%; opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-20px) scale(1); opacity: 0; }
+  }
+
+  /* Hero content */
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+  .selected-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(212,168,67,0.12);
+    border: 1px solid rgba(212,168,67,0.4);
+    border-radius: 99px; padding: 8px 20px;
+    font-size: 12px; font-weight: 600; color: var(--gold-light);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: pop-in 0.7s cubic-bezier(.34,1.56,.64,1) both;
+    animation-delay: 0.2s;
+  }
+  .selected-badge .dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  @keyframes pop-in { from{transform:scale(0.5) translateY(20px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 8vw, 58px);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 20px;
+    animation: rise 0.9s ease both; animation-delay: 0.4s;
+  }
+  .hero-title .line2 { color: var(--gold-light); font-style: italic; display: block; }
+  @keyframes rise { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-desc {
+    font-size: 16px; color: #9BBFD4; line-height: 1.7;
+    margin-bottom: 32px; font-weight: 300;
+    animation: rise 0.9s ease both; animation-delay: 0.6s;
+  }
+
+  .prize-display {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 36px;
+    animation: rise 0.9s ease both; animation-delay: 0.8s;
+  }
+  .prize-box {
+    background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(212,168,67,0.05));
+    border: 1.5px solid rgba(212,168,67,0.5);
+    border-radius: 16px; padding: 16px 28px; text-align: center;
+  }
+  .prize-label { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .prize-amount { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--gold-light); line-height: 1; }
+  .prize-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; animation: rise 0.9s ease both; animation-delay: 1s; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #FF6B40, #FF3510);
+    color: white; font-size: 15px; font-weight: 700;
+    padding: 18px 44px; border-radius: 99px; border: none;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 8px 40px rgba(255,90,54,0.45);
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-decoration: none; animation: pulse-cta 2.5s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  .btn-primary:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 16px 50px rgba(255,90,54,0.6); }
+  @keyframes pulse-cta { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .slots-left { font-size: 13px; color: var(--muted); }
+  .slots-left strong { color: var(--coral); }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-bar {
+    background: linear-gradient(90deg, #040F18, #062030, #040F18);
+    border-top: 1px solid rgba(212,168,67,0.15);
+    border-bottom: 1px solid rgba(212,168,67,0.15);
+    padding: 28px 20px; text-align: center;
+  }
+  .cd-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .cd-row { display: flex; justify-content: center; align-items: center; gap: 8px; }
+  .cd-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 14px; padding: 14px 18px; min-width: 70px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cd-block::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(212,168,67,0.06),transparent); pointer-events:none; }
+  .cd-num { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: var(--gold-light); line-height: 1; display: block; }
+  .cd-lbl { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; display: block; }
+  .cd-sep { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); opacity: 0.5; line-height: 1; padding-bottom: 10px; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 64px 24px; }
+  .section-inner { max-width: 680px; margin: 0 auto; }
+
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; text-align: center; }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 6vw, 42px); font-weight: 700;
+    text-align: center; margin-bottom: 10px; line-height: 1.2;
+  }
+  .section-heading em { color: var(--gold-light); font-style: italic; }
+  .section-caption { text-align: center; color: var(--muted); font-size: 15px; margin-bottom: 40px; line-height: 1.6; font-weight: 300; }
+
+  /* ─── PACKAGE CARDS ─── */
+  .package-grid { display: grid; gap: 14px; }
+
+  .pkg-card {
+    display: flex; align-items: flex-start; gap: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 22px 20px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(24px);
+  }
+  .pkg-card.visible { animation: card-rise 0.5s ease forwards; }
+  @keyframes card-rise { to{opacity:1;transform:translateY(0)} }
+  .pkg-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(212,168,67,0.05),transparent); opacity:0; transition:opacity 0.3s; border-radius:20px; }
+  .pkg-card:hover { border-color: rgba(212,168,67,0.3); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(11,138,154,0.15); }
+  .pkg-card:hover::before { opacity:1; }
+
+  .pkg-icon-wrap {
+    width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(212,168,67,0.2), rgba(212,168,67,0.05));
+    border: 1px solid rgba(212,168,67,0.25);
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+  }
+  .pkg-body h3 { font-size: 16px; font-weight: 600; color: var(--gold-light); margin-bottom: 5px; }
+  .pkg-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .pkg-value { margin-top: 8px; font-size: 12px; color: var(--teal-light); font-weight: 600; }
+
+  /* ─── VALUE STRIP ─── */
+  .value-strip {
+    background: linear-gradient(135deg, rgba(11,138,154,0.15), rgba(212,168,67,0.1));
+    border: 1px solid rgba(212,168,67,0.25);
+    border-radius: 20px; padding: 28px 24px; text-align: center;
+    margin-top: 24px;
+  }
+  .value-strip .total-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  .value-strip .total-amt { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--gold-light); line-height: 1; }
+  .value-strip .total-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps-bg { background: linear-gradient(135deg, #040F18, #06201A); }
+  .steps-row { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--deep);
+  }
+  .step-body h4 { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+  .step-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testi-bg { background: linear-gradient(170deg, #040F18, #051A0E); }
+  .testi-grid { display: grid; gap: 16px; }
+
+  .testi-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 22px; padding: 26px 22px; position: relative;
+    transition: border-color 0.3s;
+  }
+  .testi-card:hover { border-color: rgba(212,168,67,0.25); }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    position: absolute; top: 12px; right: 20px;
+    font-size: 72px; color: var(--gold); opacity: 0.1; line-height: 1;
+  }
+  .stars { color: var(--gold); font-size: 13px; letter-spacing: 3px; margin-bottom: 12px; }
+  .testi-text { font-size: 14px; color: #B0C8D8; line-height: 1.75; margin-bottom: 18px; font-style: italic; font-weight: 300; }
+  .testi-footer { display: flex; align-items: center; gap: 12px; }
+  .testi-av {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    border: 2px solid rgba(212,168,67,0.3);
+  }
+  .testi-name { font-weight: 700; font-size: 14px; }
+  .testi-place { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 64px 24px;
+    background: linear-gradient(135deg, #040F18, #062030);
+  }
+  .cta-card {
+    max-width: 560px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(212,168,67,0.1), rgba(11,138,154,0.08));
+    border: 1.5px solid rgba(212,168,67,0.35);
+    border-radius: 28px; padding: 44px 32px; text-align: center;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,168,67,0.1);
+    position: relative; overflow: hidden;
+  }
+  .cta-card::before {
+    content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+    width:200px; height:200px; background:radial-gradient(circle,rgba(212,168,67,0.15),transparent 70%);
+    pointer-events:none;
+  }
+  .cta-card .trophy { font-size: 56px; margin-bottom: 16px; animation: trophy-bob 3s ease-in-out infinite; }
+  @keyframes trophy-bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-8px) rotate(3deg)} }
+  .cta-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+  .cta-card p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; font-weight: 300; }
+  .cta-card .prize-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(212,168,67,0.12); border: 1px solid rgba(212,168,67,0.4);
+    border-radius: 99px; padding: 10px 22px;
+    font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--gold-light);
+    margin-bottom: 28px;
+  }
+  .btn-claim {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #FF6B40, #FF3510);
+    color: white; font-size: 16px; font-weight: 700;
+    padding: 18px 48px; border-radius: 99px; border: none;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 10px 40px rgba(255,90,54,0.5);
+    transition: all 0.25s; text-decoration: none; display: inline-block;
+    width: 100%; text-align: center;
+  }
+  .btn-claim:hover { transform: translateY(-3px); box-shadow: 0 16px 50px rgba(255,90,54,0.65); }
+  .cta-note { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
+
+  /* ─── FAQ ─── */
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0; cursor: pointer; gap: 16px;
+    font-size: 15px; font-weight: 500; color: var(--white);
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--gold-light); }
+  .faq-q .chevron {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border: 1px solid rgba(212,168,67,0.3); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--gold); transition: transform 0.3s, background 0.2s;
+  }
+  .faq-q.open .chevron { transform: rotate(180deg); background: rgba(212,168,67,0.15); }
+  .faq-a {
+    font-size: 14px; color: var(--muted); line-height: 1.75;
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding-bottom 0.35s;
+    font-weight: 300;
+  }
+  .faq-a.open { max-height: 220px; padding-bottom: 18px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #020A10;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 36px 24px; text-align: center;
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+  .footer-text { font-size: 12px; color: #3A5060; line-height: 1.8; }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin: 14px 0; }
+  .footer-links a { font-size: 12px; color: #3A7080; text-decoration: none; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 20px 24px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 99px; padding: 6px 14px;
+  }
+
+  /* Responsive */
+  @media(max-width:480px) {
+    .nav-pill { gap: 14px; padding: 10px 18px; }
+    .nav-logo { font-size: 15px; }
+    .cd-block { min-width: 58px; padding: 10px 12px; }
+    .cd-num { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>🏆 Congratulations — You Have Been Selected</span>
+    <span>🌴 Lucky Goa Getaway — ₹70,000 Prize Package</span>
+    <span>⏳ Limited Spots Available — Claim Now</span>
+    <span>✈️ All-Inclusive Goa Vacation</span>
+    <span>🏆 Congratulations — You Have Been Selected</span>
+    <span>🌴 Lucky Goa Getaway — ₹70,000 Prize Package</span>
+    <span>⏳ Limited Spots Available — Claim Now</span>
+    <span>✈️ All-Inclusive Goa Vacation</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-pill">
+    <div class="nav-logo">🌴 Lucky Goa</div>
+    <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSeRN9ecgZyXptPKVlWNdyPMl9Bkn0JkbKjscHn_0oZbS07OEA/viewform?usp=publish-editor" target="_blank" rel="noopener">Claim Prize</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="selected-badge">
+      <span class="dot"></span>
+      You Have Been Specially Selected
+    </div>
+
+    <h1 class="hero-title">
+      Congratulations!
+      <span class="line2">You've Won a Free<br>Goa Vacation!</span>
+    </h1>
+
+    <p class="hero-desc">
+      A luxurious all-inclusive tropical escape worth ₹70,000 is waiting for you.
+      Sun-kissed beaches, premium resorts & unforgettable memories — all free.
+    </p>
+
+    <div class="prize-display">
+      <div class="prize-box">
+        <div class="prize-label">Total Package Value</div>
+        <div class="prize-amount">₹70,000</div>
+        <div class="prize-sub">All-Inclusive • 5 Nights • For 2</div>
+      </div>
+    </div>
+
+    <div class="hero-cta-wrap">
+      <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeRN9ecgZyXptPKVlWNdyPMl9Bkn0JkbKjscHn_0oZbS07OEA/viewform?usp=publish-editor" target="_blank" rel="noopener">
+        Claim My Prize Now <span class="arrow">→</span>
+      </a>
+      <div class="slots-left">🔥 Only <strong>7 slots remaining</strong> — offer expires soon</div>
+    </div>
+  </div>
+
+  <div class="beach-scene">
+    <div class="sun-wrap"><div class="sun"></div></div>
+    <div class="horizon"></div>
+    <div class="sea"></div>
+    <div class="wave-1"></div>
+    <div class="wave-2"></div>
+    <div class="palm palm-l">🌴</div>
+    <div class="palm palm-r">🌴</div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-bar">
+  <div class="cd-eyebrow">⏳ Offer Expires In</div>
+  <div class="cd-row">
+    <div class="cd-block"><span class="cd-num" id="cd-h">04</span><span class="cd-lbl">Hours</span></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">Mins</span></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">Secs</span></div>
+  </div>
+</div>
+
+<!-- PACKAGE INCLUSIONS -->
+<section class="section">
+  <div class="section-inner">
+    <p class="eyebrow">What's Included</p>
+    <h2 class="section-heading">Your Complete <em>Prize Package</em></h2>
+    <p class="section-caption">Everything covered — nothing to pay. A full holiday experience worth ₹70,000.</p>
+
+    <div class="package-grid" id="pkgGrid">
+      <div class="pkg-card">
+        <div class="pkg-icon-wrap">✈️</div>
+        <div class="pkg-body">
+          <h3>Round-Trip Flights</h3>
+          <p>Economy class tickets for 2 from your nearest metro airport to Goa (Dabolim / Mopa), valid for 12 months.</p>
+          <div class="pkg-value">Worth ₹18,000</div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-icon-wrap">🏨</div>
+        <div class="pkg-body">
+          <h3>4-Star Beachfront Resort — 5 Nights</h3>
+          <p>Oceanview room with daily breakfast included. Choose from our curated collection of premium Goa properties.</p>
+          <div class="pkg-value">Worth ₹30,000</div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-icon-wrap">🍹</div>
+        <div class="pkg-body">
+          <h3>Welcome Package & Dining</h3>
+          <p>Complimentary welcome drinks on arrival, romantic candlelight dinner, and two resort credit vouchers.</p>
+          <div class="pkg-value">Worth ₹8,000</div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-icon-wrap">🏄</div>
+        <div class="pkg-body">
+          <h3>Adventure & Activities</h3>
+          <p>Water sports session, sunset cruise, and a guided heritage tour of Old Goa — fully included.</p>
+          <div class="pkg-value">Worth ₹9,000</div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-icon-wrap">🚗</div>
+        <div class="pkg-body">
+          <h3>Airport Transfers</h3>
+          <p>AC cab transfers on arrival and departure, available 24/7, pre-booked and waiting for you.</p>
+          <div class="pkg-value">Worth ₹5,000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="value-strip">
+      <div class="total-label">Total Package Value</div>
+      <div class="total-amt">₹70,000</div>
+      <div class="total-sub">100% Free for Selected Winners • No Hidden Charges</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps-bg">
+  <div class="section-inner">
+    <p class="eyebrow">Simple Process</p>
+    <h2 class="section-heading">How to <em>Claim Your Prize</em></h2>
+    <p class="section-caption">Three easy steps to confirm your free Goa vacation.</p>
+
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Fill the Claim Form</h4>
+          <p>Click "Claim My Prize" and complete the short Google Form with your basic details. Takes less than 2 minutes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Receive Confirmation</h4>
+          <p>Our team will verify your entry and call you within 48 hours with your official winner confirmation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Pack & Fly to Goa!</h4>
+          <p>Choose your travel dates, receive your voucher package, and enjoy your all-inclusive Goa getaway!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-bg">
+  <div class="section-inner">
+    <p class="eyebrow">Winner Stories</p>
+    <h2 class="section-heading">What Our <em>Winners Say</em></h2>
+    <p class="section-caption">Thousands of happy travellers — you could be next.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">I couldn't believe it when I got the call! The resort was absolutely stunning — waking up to the sound of waves every morning was a dream come true. Totally life-changing experience!</p>
+        <div class="testi-footer">
+          <div class="testi-av">😄</div>
+          <div><div class="testi-name">Priya Sharma</div><div class="testi-place">Mumbai, Maharashtra</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">The whole experience was surreal. Five-star treatment, incredible food, and the water sports were amazing. My wife and I had the best anniversary ever. Highly recommend!</p>
+        <div class="testi-footer">
+          <div class="testi-av">🤩</div>
+          <div><div class="testi-name">Rajesh Kumar</div><div class="testi-place">Bangalore, Karnataka</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">We almost didn't fill the form thinking it was too good to be true — but we're so glad we did! Goa was absolutely magical. 10/10 experience for us both.</p>
+        <div class="testi-footer">
+          <div class="testi-av">🌟</div>
+          <div><div class="testi-name">Deepa & Anil Verma</div><div class="testi-place">Hyderabad, Telangana</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CTA -->
+<section class="cta-section">
+  <div class="cta-card">
+    <div class="trophy">🏆</div>
+    <h2>Ready to Claim Your Prize?</h2>
+    <p>Your free Goa vacation is just one click away. Fill in the quick form and our team will be in touch within 48 hours.</p>
+    <div class="prize-pill">🌴 ₹70,000 Package</div>
+    <a class="btn-claim" href="https://docs.google.com/forms/d/e/1FAIpQLSeRN9ecgZyXptPKVlWNdyPMl9Bkn0JkbKjscHn_0oZbS07OEA/viewform?usp=publish-editor" target="_blank" rel="noopener">
+      🎉 Claim My Prize Now →
+    </a>
+    <p class="cta-note">🔒 Secure form • Takes less than 2 minutes • No purchase required</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-inner">
+    <p class="eyebrow">Got Questions?</p>
+    <h2 class="section-heading">Frequently Asked <em>Questions</em></h2>
+    <p class="section-caption">Everything you need to know about the Lucky Goa Getaway prize.</p>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">🔒 Secure Form</div>
+  <div class="trust-item">✅ Verified Promotion</div>
+  <div class="trust-item">🏅 4.9/5 Rating</div>
+  <div class="trust-item">📞 24/7 Support</div>
+  <div class="trust-item">🎯 No Purchase Needed</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌴 Lucky Goa Getaway</div>
+  <div class="footer-links">
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact Us</a>
+  </div>
+  <p class="footer-text">© 2024 Lucky Goa Getaway. All rights reserved.<br>This is a promotional campaign. Prize subject to availability and terms.</p>
+</footer>
+
+<script>
+  // Floating particles
+  const pc = ['#D4A843','#14C4DA','#ffffff'];
+  const pw = document.getElementById('particles');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div'); p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;width:${2+Math.random()*4}px;height:${2+Math.random()*4}px;background:${pc[Math.floor(Math.random()*pc.length)]};animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*10}s;`;
+    pw.appendChild(p);
+  }
+
+  // Countdown
+  const end = Date.now() + (3*3600 + Math.floor(Math.random()*3600))*1000;
+  function tick(){
+    const left=Math.max(0,end-Date.now());
+    const h=Math.floor(left/3600000), m=Math.floor((left%3600000)/60000), s=Math.floor((left%60000)/1000);
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+
+  // Animate package cards on scroll
+  const cards=document.querySelectorAll('.pkg-card');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('visible'), i*100);
+        observer.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  cards.forEach(c=>observer.observe(c));
+
+  // FAQ
+  const faqs=[
+    {q:"How was I selected for this offer?",a:"Winners are identified through a randomised computerised draw from a pool of eligible participants. You were selected as a lucky winner from our monthly prize draw."},
+    {q:"Is there any cost to claim the prize?",a:"Absolutely none! The Lucky Goa Getaway package is completely free for selected winners. No hidden charges, processing fees, or purchases are required."},
+    {q:"How long is the prize valid?",a:"The holiday package is valid for 12 months from the date of confirmation. You can pick any travel dates within this period based on availability."},
+    {q:"How will I receive my confirmation?",a:"After you submit the claim form, our team will verify your entry and call you within 48 hours. You'll then receive an official prize voucher on your email."},
+    {q:"Can I choose my travel dates?",a:"Yes! Once confirmed, you can choose any available dates within the 12-month validity period. We recommend booking at least 3–4 weeks in advance."},
+  ];
+  const fl=document.getElementById('faqList');
+  faqs.forEach(f=>{
+    const d=document.createElement('div'); d.className='faq-item';
+    d.innerHTML=`<div class="faq-q" onclick="toggleFaq(this)"><span>${f.q}</span><span class="chevron">▼</span></div><div class="faq-a">${f.a}</div>`;
+    fl.appendChild(d);
+  });
+  function toggleFaq(el){
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
